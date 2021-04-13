@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import { useRoute, useNavigation } from '@react-navigation/native';
+
+import { Container } from '../../components/Containers';
+import Button from '../../components/Button';
 
 import { calculateImc } from '../../utils/index';
 
@@ -36,19 +39,23 @@ const Imc: React.FC = () => {
   };
 
   return (
-    <View style={{ marginTop: 60 }}>
+    <Container>
+      <Image
+        source={require('../../assets/imc.png')}
+        style={{ width: 100, height: 100 }}
+      />
       <Text>
         Você está no:
         {resultImc}
       </Text>
 
-      <TouchableOpacity
+      <Button
         onPress={() => {
           handleResult();
         }}
       >
-        <Text>PROXIMO</Text>
-      </TouchableOpacity>
+        PRÓXIMO
+      </Button>
 
       <TouchableOpacity
         onPress={() => {
@@ -57,7 +64,7 @@ const Imc: React.FC = () => {
       >
         <Text style={{ color: '#000' }}>VOLTAR</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 };
 

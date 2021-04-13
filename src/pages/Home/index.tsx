@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { TextInput, Image } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { useNavigation } from '@react-navigation/native';
+
+import Button from '../../components/Button';
+import { Container, Input } from '../../components/Containers';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
@@ -31,29 +34,33 @@ const Home: React.FC = () => {
   };
 
   return (
-    <View style={{ marginTop: 60 }}>
-      <TextInput
+    <Container style={{ marginTop: 60 }}>
+      <Image
+        source={require('../../assets/user.png')}
+        style={{ width: 100, height: 100 }}
+      />
+      <Input
         value={name}
         placeholder="Nome"
         onChangeText={(text) => {
           setName(text);
         }}
       />
-      <TextInput
+      <Input
         value={age}
         placeholder="Idade"
         onChangeText={(text) => {
           setAge(text);
         }}
       />
-      <TouchableOpacity
+      <Button
         onPress={() => {
           handleNewPage();
         }}
       >
-        <Text style={{ color: '#000' }}>CADASTRAR</Text>
-      </TouchableOpacity>
-    </View>
+        CADASTRAR
+      </Button>
+    </Container>
   );
 };
 

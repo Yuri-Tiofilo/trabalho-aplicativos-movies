@@ -1,56 +1,49 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-
-import AsyncStorage from '@react-native-community/async-storage';
+import { Text, TouchableOpacity, Image } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { Input, Container } from '../../components/Containers';
+import Button from '../../components/Button';
 
 const Almoco: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  console.log('route');
-  console.log(route);
   const [almoco, setalmoco] = useState('');
+
   const handleNewPage = async (): Promise<void> => {
-    // if (almoco !== '') {
-    const almocoExist = await AsyncStorage.getItem('almoco');
-
-    if (almocoExist !== null) {
-      await AsyncStorage.removeItem('almoco');
-
-      const data = {
+    if (almoco !== '') {
+      navigation.navigate('Janta', {
+        name: route.params?.name,
+        age: route.params?.age,
+        heigth: route.params?.heigth,
+        weigth: route.params?.weigth,
         almoco,
-      };
-
-      await AsyncStorage.setItem('almoco', JSON.stringify(data));
+      });
     }
-    navigation.navigate('Janta', {
-      name: route.params?.name,
-      age: route.params?.age,
-      heigth: route.params?.heigth,
-      weigth: route.params?.weigth,
-      almoco,
-    });
-    // }
   };
 
   return (
-    <View style={{ marginTop: 60 }}>
-      <TextInput
+    <Container style={{ marginTop: 60 }}>
+      <Image
+        source={require('../../assets/almoco2.png')}
+        style={{ width: 100, height: 100 }}
+      />
+      <Input
         value={almoco}
         placeholder="Peso do Almoço: (em gramas)"
         onChangeText={(text) => {
           setalmoco(text);
         }}
       />
-
-      <TouchableOpacity
+      <Button
         onPress={() => {
           handleNewPage();
         }}
       >
-        <Text style={{ color: '#000' }}>CADASTRAR</Text>
-      </TouchableOpacity>
+        CADASTRAR
+      </Button>
+
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
@@ -58,7 +51,7 @@ const Almoco: React.FC = () => {
       >
         <Text style={{ color: '#000' }}>VOLTAR</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 };
 

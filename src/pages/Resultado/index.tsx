@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, Image } from 'react-native';
 
 import { useRoute, useNavigation } from '@react-navigation/native';
+
+import { Container } from '../../components/Containers';
+import Button from '../../components/Button';
 
 import { calculateCalories } from '../../utils';
 
@@ -30,7 +33,11 @@ const Resultado: React.FC = () => {
   }, [route]);
 
   return (
-    <View>
+    <Container>
+      <Image
+        source={require('../../assets/results.png')}
+        style={{ width: 100, height: 100 }}
+      />
       <Text>Calorias:</Text>
       <Text>
         ingeridas:
@@ -41,14 +48,14 @@ const Resultado: React.FC = () => {
         {resultCalories.totalGast}
       </Text>
 
-      <TouchableOpacity
+      <Button
         onPress={() => {
           navigation.navigate('Home');
         }}
       >
-        <Text style={{ color: '#000' }}>FINALIZAR</Text>
-      </TouchableOpacity>
-    </View>
+        FINALIZAR
+      </Button>
+    </Container>
   );
 };
 

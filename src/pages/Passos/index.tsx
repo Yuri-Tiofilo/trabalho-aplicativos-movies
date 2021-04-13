@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { Text, TouchableOpacity, Image } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { Container, Input } from '../../components/Containers';
+import Button from '../../components/Button';
 
 const Passos: React.FC = () => {
   const navigation = useNavigation();
@@ -24,8 +27,12 @@ const Passos: React.FC = () => {
   };
 
   return (
-    <View style={{ marginTop: 60 }}>
-      <TextInput
+    <Container style={{ marginTop: 60 }}>
+      <Image
+        source={require('../../assets/passos.png')}
+        style={{ width: 100, height: 100 }}
+      />
+      <Input
         value={passos}
         placeholder="Quantidade de passos no dia"
         onChangeText={(text) => {
@@ -33,13 +40,14 @@ const Passos: React.FC = () => {
         }}
       />
 
-      <TouchableOpacity
+      <Button
         onPress={() => {
           handleNewPage();
         }}
       >
-        <Text style={{ color: '#000' }}>CADASTRAR</Text>
-      </TouchableOpacity>
+        CADASTRAR
+      </Button>
+
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
@@ -47,7 +55,7 @@ const Passos: React.FC = () => {
       >
         <Text style={{ color: '#000' }}>VOLTAR</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 };
 

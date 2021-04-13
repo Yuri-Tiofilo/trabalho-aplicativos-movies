@@ -1,49 +1,34 @@
 import React, { ReactNode, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
-interface PropsParams {
-  name: string;
-  age: string;
-}
-
-interface Props {
-  params: PropsParams;
-}
+import Button from '../../components/Button';
+import { Container, Input } from '../../components/Containers';
 
 const Peso: React.FC = () => {
   const navigation = useNavigation();
   const routes = useRoute();
 
-  console.log(routes.params?.name);
   const [heigth, setheigth] = useState('');
   const [weigth, setweigth] = useState('');
-  const handleNewPage = async (): Promise<void> => {
-    const dataUser = await AsyncStorage.getItem('userData');
-
-    if (dataUser !== null) {
-      await AsyncStorage.removeItem('userData');
-
-      const data = {
+  const handleNewPage = (): void => {
+    if (heigth !== '' || weigth !== '') {
+      navigation.navigate('Almoco', {
+        name: routes.params?.name,
+        age: routes.params?.age,
         heigth,
         weigth,
-      };
-
-      await AsyncStorage.setItem('userData', JSON.stringify(data));
+      });
     }
-    navigation.navigate('Almoco', {
-      name: routes.params?.name,
-      age: routes.params?.age,
-      heigth,
-      weigth,
-    });
   };
 
   return (
-    <View style={{ marginTop: 60 }}>
+    <Container>
+      <Image
+        source={require('../../assets/balanca.png')}
+        style={{ width: 100, height: 100 }}
+      />
       <TextInput
         value={heigth}
         placeholder="Altura"
@@ -58,13 +43,14 @@ const Peso: React.FC = () => {
           setweigth(text);
         }}
       />
-      <TouchableOpacity
+      <Button
         onPress={() => {
           handleNewPage();
         }}
       >
-        <Text style={{ color: '#000' }}>CADASTRAR</Text>
-      </TouchableOpacity>
+        CADASTRAR
+      </Button>
+
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
@@ -72,7 +58,7 @@ const Peso: React.FC = () => {
       >
         <Text style={{ color: '#000' }}>VOLTAR</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 };
 
