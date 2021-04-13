@@ -1,0 +1,15 @@
+yarn add -D eslint-plugin-react@^7.19.0 @typescript-eslint/eslint-plugin@latest eslint-config-airbnb@latest eslint-plugin-import@^2.20.1 eslint-plugin-jsx-a11y@^6.2.3 eslint-plugin-react-hooks@^2.5.0 @typescript-eslint/parser@latest
+1 - yarn eslint --init
+? How would you like to use ESLint? To check syntax, find problems, and enforce code style
+? What type of modules does your project use? JavaScript modules (import/export)
+? Which framework does your project use? React
+? Does your project use TypeScript? Yes
+? Where does your code run?
+? How would you like to define a style for your project? Use a popular style guide
+? Which style guide do you want to follow? Airbnb: https://github.com/airbnb/javascript
+? What format do you want your config file to be in? JSON
+-- copy dependencies
+yarn add -D dependencies
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+
+cd android;./gradlew clean;cd ..;yarn android
