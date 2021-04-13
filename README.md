@@ -1,12 +1,12 @@
-Aplicativo referente ao trabalho da disciplina de Aplicativos Moveis
+# Aplicativo referente ao trabalho da disciplina de Aplicativos Moveis
 
-### Como iniciar?
+## Como iniciar?
 
 ````
 yarn install or npm install
 ````
 
-depois
+depois rode no terminal:
 
 ````
 yarn android or yarn ios
